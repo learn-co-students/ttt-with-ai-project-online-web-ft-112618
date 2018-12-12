@@ -10,11 +10,11 @@ class Board
   end
 
   def display
-    puts " #{self.cells[0]} | #{self.cells[1]} | #{self.cells[2]} "
+    puts ("\n #{self.cells[0]} | #{self.cells[1]} | #{self.cells[2]} ".gsub(/X/, "X".colorize(:light_blue)).gsub(/O/, "O".colorize(:green)))
     puts "-----------"
-    puts " #{self.cells[3]} | #{self.cells[4]} | #{self.cells[5]} "
+    puts (" #{self.cells[3]} | #{self.cells[4]} | #{self.cells[5]} ".gsub(/X/, "X".colorize(:light_blue)).gsub(/O/, "O".colorize(:green)))
     puts "-----------"
-    puts " #{self.cells[6]} | #{self.cells[7]} | #{self.cells[8]} "
+    puts (" #{self.cells[6]} | #{self.cells[7]} | #{self.cells[8]} ".gsub(/X/, "X".colorize(:light_blue)).gsub(/O/, "O".colorize(:green)))
   end
 
   def position(input)

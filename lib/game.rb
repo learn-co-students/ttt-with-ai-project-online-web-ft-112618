@@ -7,11 +7,24 @@ class Game
     [0, 4, 8], [2, 4, 6]
   ]
 
-  def initialize (p1 = nil, p2 = nil, board = nil)
-    p1 ? @player_1 = p1 : @player_1 = Players::Human.new("X")
-    p2 ? @player_2 = p2 : @player_2 = Players::Human.new("O")
+  def initialize (p1: "human", p2: "human", board: nil)
+    if p1 == "comp"
+      @player_1 = Players::Computer.new("X")
+    elsif p1 == "human"
+      @player_1 = Players::Human.new("X")
+    else
+      @player_1 = p1
+    end
+    if p2 == "comp"
+      @player_2 = Players::Computer.new("O")
+    elsif p2 == "human"
+      @player_2 = Players::Human.new("O")
+    else
+      @player_2 = p2
+    end
     board ? @board = board : @board = Board.new
   end
+
 
   def board
     @board
@@ -45,14 +58,15 @@ class Game
   end
 
   def turn
-    puts "Where do you want to move?"
-    input = self.current_player.move(board)
-    position = input.to_i
-    # binding.pry
+    self.board.display
+    self.current_player == self.player_1 ? x = 1 : x = 2
+    puts "\n#{self.current_player.name} \##{x}. Where do you want to move?"
+    position = self.current_player.move(board)
     if self.board.valid_move?(position)
       self.board.update(position, self.current_player)
     else
-      puts "Invalid move"
+      puts "That move isn't valid, please try again!"
+      binding.pry
       self.turn
     end
   end
@@ -62,15 +76,13 @@ class Game
       self.turn
       self.play
     elsif self.won?
-      puts "Congratulations #{self.winner}!"
+      self.board.display
+      self.current_player == self.player_1 ? x = 2 : x = 1
+      puts "\nCongratulations, Player \##{x}!"
     else
-      puts "Cat's Game!"
+      self.board.display
+      puts "\nCat's Game!"
     end
-    # if self.over?
-    #   puts "The game is over"
-    # else
-    #   self.play
-    # end
   end
 
 end

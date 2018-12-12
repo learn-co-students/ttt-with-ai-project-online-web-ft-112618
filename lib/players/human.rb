@@ -9,5 +9,9 @@ module Players
       input = gets.strip
     end
 
+    def name
+      "Player"
+    end
+
   end
 end

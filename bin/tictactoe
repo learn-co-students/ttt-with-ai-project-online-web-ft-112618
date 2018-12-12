@@ -1,3 +1,37 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+puts "\nWelcome to this CLI-version game of Tic-Tac-Toe!"
+loop do
+  print "\nWould you like to play a [0], [1], or [2] player game: "
+
+  game = nil
+  loop do
+    input = gets.strip
+    case input
+    when "0"
+      game = Game.new(p1: "comp", p2: "comp")
+      break
+    when "1"
+      game = Game.new(p2: "comp")
+      break
+    when "2"
+      game = Game.new
+      break
+    else
+      puts "I'm sorry, that choice is not an option. Please choose again."
+    end
+  end
+  game.play
+
+  print "\nWould you like to play again? [Y/n]: "
+  input = gets.strip
+  if input.match(/n/i)
+    break
+  elsif !(input.match(/y/i))
+    puts "\nI didn't recognize that input so... let's play again!"
+  end
+
+end
+
+puts "\nThank you for playing! Goodbye!"
