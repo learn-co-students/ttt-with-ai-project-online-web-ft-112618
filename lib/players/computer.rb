@@ -7,7 +7,8 @@ module Players
 
 
     def move(board)
-      input = gets.strip
+      x = rand(1..9).to_s
+      board.valid_move?(x) ? x : self.move(board)
     end
 
   end

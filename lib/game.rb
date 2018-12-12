@@ -74,18 +74,3 @@ class Game
   end
 
 end
-
-
-
-
-
-#save for AI
-
-# moved = false
-# until moved == true
-#   x = rand(1..9)
-#   if !(self.board.taken?(rand(1..9)))
-#     self.board.update(x, self.player)
-#     moved = true
-#   end
-# end
