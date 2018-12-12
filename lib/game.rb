@@ -47,12 +47,30 @@ class Game
   def turn
     puts "Where do you want to move?"
     input = self.current_player.move(board)
-    position = self.board.position(input)
-    if !(self.board.taken?(position))
+    position = input.to_i
+    # binding.pry
+    if self.board.valid_move?(position)
       self.board.update(position, self.current_player)
     else
+      puts "Invalid move"
       self.turn
     end
+  end
+
+  def play
+    if self.over? == false
+      self.turn
+      self.play
+    elsif self.won?
+      puts "Congratulations #{self.winner}!"
+    else
+      puts "Cat's Game!"
+    end
+    # if self.over?
+    #   puts "The game is over"
+    # else
+    #   self.play
+    # end
   end
 
 end
