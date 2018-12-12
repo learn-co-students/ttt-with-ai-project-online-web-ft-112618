@@ -51,7 +51,7 @@ class Game
     if !(self.board.taken?(position))
       self.board.update(position, self.current_player)
     else
-      "invalid"
+      self.turn
     end
   end
 
